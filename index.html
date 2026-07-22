@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="sr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Originalne majice sa štampom. Dostava u Srbiji i Češkoj." />
+  <title>MISFIT PRINTS — majice sa stavom</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="extras.css" />
+</head>
+<body>
+  <div class="announce" data-i18n="announce">Besplatna dostava za 2+ majice · Srbija i Češka</div>
+  <header>
+    <a class="brand" href="#top" aria-label="MISFIT PRINTS početna">MISFIT<span>✦</span>PRINTS</a>
+    <nav>
+      <a href="#shop" data-i18n="shop">Prodavnica</a>
+      <a href="#story" data-i18n="story">Naša priča</a>
+      <a href="#faq">FAQ</a>
+    </nav>
+    <div class="actions">
+      <div class="locale" aria-label="Jezik">
+        <button class="lang active" data-lang="sr">SR</button><span>/</span><button class="lang" data-lang="cs">CZ</button>
+      </div>
+      <button class="cart-button" id="openCart" aria-label="Korpa"><span data-i18n="cart">Korpa</span> <b id="cartCount">0</b></button>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="hero-copy">
+        <p class="eyebrow" data-i18n="eyebrow">Štampano lokalno · nošeno svuda</p>
+        <h1 data-i18n="heroTitle">NE NOSI<br>ONO ŠTO<br>SVI NOSE.</h1>
+        <p class="hero-text" data-i18n="heroText">Originalne majice za ljude koji imaju svoj stav. Kvalitetan pamuk, trajna štampa i dostava u Srbiji i Češkoj.</p>
+        <a href="#shop" class="primary" data-i18n="seeCollection">Pogledaj kolekciju →</a>
+      </div>
+      <div class="hero-art" aria-label="Majica MISFIT PRINTS">
+        <div class="sun"></div>
+        <div class="tee hero-tee"><div><small>STAY</small><strong>CURIOUS.</strong><em>EST. 2026</em></div></div>
+        <div class="sticker s1">100%<br>PAMUK</div>
+        <div class="sticker s2">LIMITED<br>DROP</div>
+      </div>
+    </section>
+
+    <section class="ticker" aria-hidden="true"><div>ORIGINALNI DIZAJN ✦ KVALITETNA ŠTAMPA ✦ 100% PAMUK ✦ SRBIJA + ČEŠKA ✦ ORIGINALNI DIZAJN ✦ KVALITETNA ŠTAMPA ✦</div></section>
+
+    <section class="shop" id="shop">
+      <div class="section-head">
+        <div><p class="eyebrow" data-i18n="newDrop">Novi drop / 01</p><h2 data-i18n="pickStatement">IZABERI SVOJ STAV.</h2></div>
+        <div class="filters" id="filters">
+          <button class="active" data-filter="all" data-i18n="all">Sve</button>
+          <button data-filter="people" data-i18n="people">Ljudi</button>
+          <button data-filter="ai" data-i18n="ai">AI & Tech</button>
+          <button data-filter="mind" data-i18n="mind">Ideje</button>
+          <button data-filter="ref" data-i18n="ref">Za sudije</button>
+        </div>
+      </div>
+      <div class="products" id="products"></div>
+    </section>
+
+    <section class="manifesto" id="story">
+      <div class="manifesto-card"><span>01</span><h3 data-i18n="m1t">Bez masovne proizvodnje.</h3><p data-i18n="m1p">Štampamo male serije i dopunjujemo samo ono što ljudi zaista žele.</p></div>
+      <div class="manifesto-card orange"><span>02</span><h3 data-i18n="m2t">Šest boja. Tvoj izbor.</h3><p data-i18n="m2p">Crna, bela, siva, teget, bordo i maslinasta.</p></div>
+      <div class="manifesto-card dark"><span>03</span><h3 data-i18n="m3t">Dve zemlje. Jedan stav.</h3><p data-i18n="m3p">Lokalna dostava u Srbiji i Češkoj, bez komplikovanih carinskih troškova.</p></div>
+    </section>
+
+    <section class="faq" id="faq">
+      <p class="eyebrow">FAQ</p><h2 data-i18n="faqTitle">ČESTA PITANJA.</h2>
+      <details><summary data-i18n="q1">Kako biram veličinu?</summary><p data-i18n="a1">Majice su unisex kroja. Ako želiš uži kroj, izaberi jednu veličinu manje. Tabela veličina nalazi se uz svaki proizvod.</p></details>
+      <details><summary data-i18n="q2">Koliko traje dostava?</summary><p data-i18n="a2">Srbija: 2–4 radna dana. Češka: 1–3 radna dana. Za proizvode po narudžbini dodajemo 2 dana za štampu.</p></details>
+      <details><summary data-i18n="q3">Kako se plaća?</summary><p data-i18n="a3">U Srbiji pouzećem ili uplatom. U Češkoj bankovnim transferom ili pouzećem. Kartično plaćanje može se povezati pre objave sajta.</p></details>
+      <details><summary data-i18n="q4">Mogu li da zamenim veličinu?</summary><p data-i18n="a4">Da. Javi nam se u roku od 14 dana, a majica mora biti nenošena i neoprana.</p></details>
+    </section>
+  </main>
+
+  <footer><a class="brand" href="#top">MISFIT<span>✦</span>PRINTS</a><p data-i18n="footerText">Originalne majice. Bez praznih reči.</p><p>© 2026 MISFIT PRINTS</p></footer>
+
+  <div class="overlay" id="overlay"></div>
+  <aside class="drawer" id="cartDrawer" aria-label="Korpa">
+    <div class="drawer-head"><h2 data-i18n="yourCart">Tvoja korpa</h2><button id="closeCart">×</button></div>
+    <div id="cartItems" class="cart-items"></div>
+    <div class="empty" id="emptyCart"><b data-i18n="emptyCart">Korpa je prazna.</b><span data-i18n="emptyHint">Pronađi majicu koja govori umesto tebe.</span></div>
+    <div class="cart-footer" id="cartFooter">
+      <label><span data-i18n="deliveryCountry">Zemlja dostave</span><select id="country"><option value="rs">Srbija</option><option value="cz">Česká republika</option></select></label>
+      <div class="total"><span data-i18n="total">Ukupno</span><strong id="total">0 RSD</strong></div>
+      <button class="checkout" id="checkout" data-i18n="order">Naruči preko WhatsAppa →</button>
+      <small data-i18n="checkoutHint">Porudžbinu potvrđuješ direktno sa nama. Plaćanje se ne vrši na sajtu.</small>
+    </div>
+  </aside>
+
+  <div class="modal" id="productModal" role="dialog" aria-modal="true"><div class="modal-card"><button class="modal-close" id="closeModal">×</button><div id="modalContent"></div></div></div>
+  <div class="toast" id="toast" data-i18n="added">Dodato u korpu!</div>
+  <script src="app.js"></script>
+</body>
+</html>

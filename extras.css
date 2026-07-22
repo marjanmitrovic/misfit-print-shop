@@ -1,0 +1,15 @@
+.design-image{position:relative;z-index:1;width:86%;height:86%;object-fit:contain;filter:drop-shadow(0 14px 12px #0004)}
+.art-0{background:#ffd447}.art-1{background:#ff8b69}.art-2{background:#9bc8df}.art-3{background:#b9d67c}.art-4{background:#d7b6dd}.art-5{background:#f0b36d}
+.cart-thumb{overflow:hidden}.cart-thumb img{width:100%;height:100%;object-fit:cover}
+.colors button{display:flex;align-items:center;gap:6px;font-size:11px}.colors i{width:13px;height:13px;border-radius:50%;border:1px solid #777}
+.modal-visual .design-image{width:92%;height:92%}
+.product-art{background:#e6e0d7}.product-art:before{display:none}
+.model-mockup{position:relative;width:100%;height:100%;overflow:hidden;background:#e6e0d7}
+.model-photo{width:100%;height:100%;object-fit:cover;display:block}
+.shirt-print{position:absolute;z-index:2;left:50%;top:53%;width:43%;height:36%;transform:translate(-50%,-50%);object-fit:contain;filter:contrast(1.1) saturate(1.07) drop-shadow(0 1px 1px #0004)}
+.model-mockup.female .shirt-print{top:52.5%;width:40%;height:34%}
+.model-mockup.female.white-shirt .shirt-print{top:53%;width:39%}
+.model-mockup.female.light-shirt .shirt-print{top:52%;width:40%}
+.modal-visual{overflow:hidden;background:#e6e0d7}.modal-visual .model-mockup{width:100%;height:500px}
+.sizes button{font-size:14px;min-width:48px}.colors button.active{outline:2px solid var(--orange);outline-offset:2px}
+@media(max-width:900px){.modal-visual .model-mockup{height:430px}}
