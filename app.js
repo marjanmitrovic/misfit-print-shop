@@ -40,7 +40,6 @@ const mockupProfiles={black:'male',white:'female white-shirt',gray:'female light
 // Colours are approved per actual artwork, not per category. The supplied print
 // files have one version made for black and one made for white shirts, so navy,
 // burgundy and olive are intentionally not offered as unverified substitutes.
-const blackOnlyPrints=new Set([]);
 const photoColors={
 'product-kratky-zivot-cs.png':['black'],
 'product-born-to-referee.png':['black'],
@@ -50,7 +49,8 @@ const photoColors={
 'product-zivot-zuby-cs.png':['black'],
 'product-kafe-problem-cs.png':['black']
 };
-const availableColors=p=>p.photo?(photoColors[p.file]||['black']):(blackOnlyPrints.has(p.id)?['black']:['black','white']);
+// Light-shirt PNGs contain damaged filled letter counters. Layered prints are black-shirt only.
+const availableColors=p=>p.photo?(photoColors[p.file]||['black']):['black'];
 const bestColor=p=>availableColors(p)[p.id%Math.min(2,availableColors(p).length)];
 let lang=localStorage.getItem('mp-lang')||'sr',cart=JSON.parse(localStorage.getItem('mp-cart')||'[]').filter(i=>{const p=products.find(p=>p.id===i.id);return p&&availableColors(p).includes(i.color)}),filter='all',size='L',color='black',active=null;
 const $=s=>document.querySelector(s),$$=s=>document.querySelectorAll(s),t=k=>T[lang][k]||k,money=(p,c=$('#country')?.value||'rs')=>c==='cz'?`${p.czk} Kč`:`${p.rsd.toLocaleString('sr-RS')} RSD`;
