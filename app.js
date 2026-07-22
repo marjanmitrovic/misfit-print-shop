@@ -24,36 +24,40 @@ const catalogProducts=[
 ];
 // Remove the former first five products and lead with the final four photos.
 // Product IDs stay unchanged so existing image paths and cart entries remain valid.
-const products=[...catalogProducts.slice(-4),...catalogProducts.slice(5,-4)];
+// Keep only artwork that passed the visual review. Removed designs include
+// damaged transparency, filled letter counters, visible rectangular grounds,
+// weak contrast, duplicates and artwork containing incorrect wording.
+const approvedPrintIds=new Set([
+  6,8,9,10,11,12,13,14,15,
+  22,23,24,26,27,28,
+  30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51
+]);
+const approvedCatalog=catalogProducts.filter(p=>p.photo||approvedPrintIds.has(p.id));
+const products=[...approvedCatalog.slice(-4),...approvedCatalog.slice(0,-4)];
 const colors={black:'#151515',white:'#eee',gray:'#777a7d',navy:'#1d2940',burgundy:'#6f2638',olive:'#596044'};
 const modelImages={black:'assets/models/black.png',white:'assets/models/white-female.png',gray:'assets/models/gray-female.png',navy:'assets/models/navy.png',burgundy:'assets/models/burgundy-female.png',olive:'assets/models/olive.png'};
 const mockupProfiles={black:'male',white:'female white-shirt',gray:'female light-shirt',navy:'male',burgundy:'female',olive:'male'};
-// Only offer shirt colours on which each print remains clear and balanced.
-// The two print variants are tuned for dark shirts and light neutral shirts;
-// muted coloured shirts are limited to categories whose artwork suits them.
-const categoryColors={
-people:['black','white','burgundy'],
-ai:['black','white','navy'],
-mind:['black','white','navy','olive'],
-ref:['black','white','navy']
-};
+// Colours are approved per actual artwork, not per category. The supplied print
+// files have one version made for black and one made for white shirts, so navy,
+// burgundy and olive are intentionally not offered as unverified substitutes.
+const blackOnlyPrints=new Set([]);
 const photoColors={
 'product-kratky-zivot-cs.png':['black'],
-'product-born-to-referee.png':['black','navy'],
+'product-born-to-referee.png':['black'],
 'product-hide-snacks.png':['white'],
 'product-rad-disciplina-uspeh.png':['black'],
-'product-fudbal-strast-sudjenje-cast.png':['black','navy'],
+'product-fudbal-strast-sudjenje-cast.png':['black'],
 'product-zivot-zuby-cs.png':['black'],
 'product-kafe-problem-cs.png':['black']
 };
-const availableColors=p=>p.photo?(photoColors[p.file]||['black']):(categoryColors[p.cat]||['black','white']);
+const availableColors=p=>p.photo?(photoColors[p.file]||['black']):(blackOnlyPrints.has(p.id)?['black']:['black','white']);
 const bestColor=p=>availableColors(p)[p.id%Math.min(2,availableColors(p).length)];
-let lang=localStorage.getItem('mp-lang')||'sr',cart=JSON.parse(localStorage.getItem('mp-cart')||'[]').filter(i=>products.some(p=>p.id===i.id)),filter='all',size='L',color='black',active=null;
+let lang=localStorage.getItem('mp-lang')||'sr',cart=JSON.parse(localStorage.getItem('mp-cart')||'[]').filter(i=>{const p=products.find(p=>p.id===i.id);return p&&availableColors(p).includes(i.color)}),filter='all',size='L',color='black',active=null;
 const $=s=>document.querySelector(s),$$=s=>document.querySelectorAll(s),t=k=>T[lang][k]||k,money=(p,c=$('#country')?.value||'rs')=>c==='cz'?`${p.czk} Kč`:`${p.rsd.toLocaleString('sr-RS')} RSD`;
 const printFor=(p,shirtColor)=>p.photo||((shirtColor==='white'||shirtColor==='gray')?p.printLight:p.print);
 const visual=(p,shirtColor='black')=>p.photo?`<div class="product-photo-wrap"><img class="product-photo" src="${p.photo}" alt="${p.name}" loading="lazy"></div>`:`<div class="model-mockup ${mockupProfiles[shirtColor]}" data-color="${shirtColor}"><img class="model-photo" src="${modelImages[shirtColor]}" alt="Model u ${t(shirtColor).toLowerCase()} majici"><img class="shirt-print" src="${printFor(p,shirtColor)}" alt="${p.name}"></div>`;
 function applyLang(){document.documentElement.lang=lang;$$('[data-i18n]').forEach(e=>e.innerHTML=t(e.dataset.i18n));$$('.lang').forEach(b=>b.classList.toggle('active',b.dataset.lang===lang));$('#country').value=lang==='cs'?'cz':'rs';renderProducts();renderCart()}
-function renderProducts(){let available=products.filter(p=>p.market==='both'||p.market===(lang==='cs'?'cs':'sr'));if(lang==='cs')available=available.slice(1);const list=filter==='all'?available:available.filter(p=>p.cat===filter);$('#products').innerHTML=list.map(p=>`<article class="product" data-id="${p.id}"><div class="product-art ${p.photo?'photo-product':''}"><span class="tag">${t('new')}</span>${visual(p,bestColor(p))}<button class="quick">${t('add')} →</button></div><div class="product-info"><div><h3>${p.name}</h3><p>${p.desc[lang]}</p></div><strong>${money(p)}</strong></div></article>`).join('');$$('.product').forEach(e=>e.onclick=()=>openProduct(+e.dataset.id))}
+function renderProducts(){let available=products.filter(p=>(p.market==='both'||p.market===(lang==='cs'?'cs':'sr'))&&!(lang==='cs'&&p.file==='product-zivot-zuby-cs.png'));const list=filter==='all'?available:available.filter(p=>p.cat===filter);$('#products').innerHTML=list.map(p=>`<article class="product" data-id="${p.id}"><div class="product-art ${p.photo?'photo-product':''}"><span class="tag">${t('new')}</span>${visual(p,bestColor(p))}<button class="quick">${t('add')} →</button></div><div class="product-info"><div><h3>${p.name}</h3><p>${p.desc[lang]}</p></div><strong>${money(p)}</strong></div></article>`).join('');$$('.product').forEach(e=>e.onclick=()=>openProduct(+e.dataset.id))}
 function openProduct(id){active=products.find(p=>p.id===id);size='L';color=bestColor(active);const cb=availableColors(active).map(c=>`<button class="${c===color?'active':''}" data-value="${c}"><i style="background:${colors[c]}"></i>${t(c)}</button>`).join('');$('#modalContent').innerHTML=`<div class="modal-grid"><div class="modal-visual ${active.photo?'photo-product':''}">${visual(active,color)}</div><div class="modal-body"><p class="eyebrow">MISFIT DROP / 01</p><h2>${active.name}</h2><p>${active.desc[lang]}</p><div class="price">${money(active)}</div><p class="option-title">${t('size')}</p><div class="choices sizes">${['XS','S','M','L','XL','XXL'].map(x=>`<button class="${x==='L'?'active':''}">${x}</button>`).join('')}</div><p class="option-title">${t('color')}</p><div class="choices colors">${cb}</div><button class="add" id="addCart">${t('add')} — ${money(active)}</button></div></div>`;$('#productModal').classList.add('open');$$('.sizes button').forEach(b=>b.onclick=()=>{$$('.sizes button').forEach(x=>x.classList.remove('active'));b.classList.add('active');size=b.textContent});$$('.colors button').forEach(b=>b.onclick=()=>{$$('.colors button').forEach(x=>x.classList.remove('active'));b.classList.add('active');color=b.dataset.value;if(!active.photo){const mock=$('.modal-visual .model-mockup');mock.dataset.color=color;mock.className=`model-mockup ${mockupProfiles[color]}`;mock.querySelector('.model-photo').src=modelImages[color];mock.querySelector('.model-photo').alt=`Model u ${t(color).toLowerCase()} majici`;mock.querySelector('.shirt-print').src=printFor(active,color)}});$('#addCart').onclick=addCart}
 function addCart(){cart.push({key:Date.now(),id:active.id,size,color});save();$('#productModal').classList.remove('open');$('#toast').classList.add('show');setTimeout(()=>$('#toast').classList.remove('show'),1600)}
 function save(){localStorage.setItem('mp-cart',JSON.stringify(cart));renderCart()}
