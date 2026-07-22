@@ -10,9 +10,7 @@ Otvorite `index.html` u pregledaču ili postavite ceo folder na GitHub Pages, Re
 
 - SR/CZ prebacivanje jezika
 - automatske cene RSD/CZK
-- 59 grafičkih proizvoda, uključujući 9 IT i 10 novih čeških humorističkih motiva
-- Odvojena ponuda: srpski + engleski dizajni u SR verziji, češki + engleski u CZ verziji
-- Providni printovi bez bele/crne pozadine i bez popunjenih otvora unutar slova
+- 51 pojedinačni grafički proizvod iz četa „Štampa za majice“ — bez tekstualnih zamena, kolaža i odbačenih motiva
 - filteri: Ljudi, AI & Tech, Ideje i Za sudije
 - izbor veličine i šest boja: crna, bela, siva, teget, bordo i maslinasta
 - muški i ženski modeli za unisex kolekciju; grafika je prikazana direktno na majici i boja se menja uživo

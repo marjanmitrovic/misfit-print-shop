@@ -6,10 +6,17 @@
 .product-art{background:#e6e0d7}.product-art:before{display:none}
 .model-mockup{position:relative;width:100%;height:100%;overflow:hidden;background:#e6e0d7}
 .model-photo{width:100%;height:100%;object-fit:cover;display:block}
-.shirt-print{position:absolute;z-index:2;left:50%;top:53%;width:43%;height:36%;transform:translate(-50%,-50%);object-fit:contain;filter:contrast(1.1) saturate(1.07) drop-shadow(0 1px 1px #0004)}
-.model-mockup.female .shirt-print{top:52.5%;width:40%;height:34%}
-.model-mockup.female.white-shirt .shirt-print{top:53%;width:39%}
-.model-mockup.female.light-shirt .shirt-print{top:52%;width:40%}
+.shirt-print{position:absolute;z-index:2;left:50%;top:53%;width:38%;height:31%;transform:translate(-50%,-50%);object-fit:contain;filter:drop-shadow(0 1px 1px #0003)}
+.model-mockup.female .shirt-print{top:52.5%;width:35%;height:29%}
+.model-mockup.female.white-shirt .shirt-print{top:53%;width:34%}
+.model-mockup.female.light-shirt .shirt-print{top:52%;width:35%}
 .modal-visual{overflow:hidden;background:#e6e0d7}.modal-visual .model-mockup{width:100%;height:500px}
 .sizes button{font-size:14px;min-width:48px}.colors button.active{outline:2px solid var(--orange);outline-offset:2px}
 @media(max-width:900px){.modal-visual .model-mockup{height:430px}}
+.product-art.photo-product{background:#0b0b0b}
+.product-art.photo-product:before{display:none}
+.product-photo-wrap{width:100%;height:100%;display:grid;place-items:center;background:#0b0b0b}
+.product-photo{width:100%;height:100%;display:block;object-fit:cover}
+.modal-visual.photo-product{background:#0b0b0b}
+.modal-visual.photo-product .product-photo-wrap{min-height:500px}
+.modal-visual.photo-product .product-photo{object-fit:contain}
