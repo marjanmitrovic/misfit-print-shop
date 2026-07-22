@@ -14,10 +14,13 @@ const photoProducts=[
 ];
 const cleanName=f=>f.replace(/\.png$/i,'').replace(/\(1\)$/,' — Variant 2').replace(/\b(design|graphic|poster|mockup|in bold typography)\b/gi,'').replace(/\s+/g,' ').trim().replace(/^./,c=>c.toUpperCase());
 const category=f=>/referee/i.test(f)?'ref':/AI |gaming|brain|Question/i.test(f)?'ai':/people|sarcas|anti-social|normal|cat|Hlavně|fer|review/i.test(f)?'people':'mind';
-const products=[
+const catalogProducts=[
 ...productFiles.map((file,i)=>({id:i+1,cat:category(file),name:cleanName(file),market:'both',desc:{sr:'Originalna grafika iz kolekcije.',cs:'Originální grafika z kolekce.'},original:A+file,print:`assets/prints/${String(i+1).padStart(3,'0')}.png`,printLight:`assets/prints-light/${String(i+1).padStart(3,'0')}.png`,...price})),
 ...photoProducts.map((p,i)=>({id:productFiles.length+i+1,...p,photo:A+'products/'+p.file,desc:{sr:'Fotografija gotove majice sa štampom.',cs:'Fotografie hotového trička s potiskem.'},...price}))
 ];
+// Remove the former first five products and lead with the final four photos.
+// Product IDs stay unchanged so existing image paths and cart entries remain valid.
+const products=[...catalogProducts.slice(-4),...catalogProducts.slice(5,-4)];
 const colors={black:'#151515',white:'#eee',gray:'#777a7d',navy:'#1d2940',burgundy:'#6f2638',olive:'#596044'};
 const modelImages={black:'assets/models/black.png',white:'assets/models/white-female.png',gray:'assets/models/gray-female.png',navy:'assets/models/navy.png',burgundy:'assets/models/burgundy-female.png',olive:'assets/models/olive.png'};
 const mockupProfiles={black:'male',white:'female white-shirt',gray:'female light-shirt',navy:'male',burgundy:'female',olive:'male'};
